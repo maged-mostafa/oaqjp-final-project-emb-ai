@@ -25,7 +25,8 @@ def emotion_detector(text_to_analyse):
     response = requests.post(
         URL,
         headers=HEADERS,
-        json=input_json
+        json=input_json,
+        timeout=10
     )
 
     if response.status_code == 400:
