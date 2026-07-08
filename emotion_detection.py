@@ -1,5 +1,4 @@
 import requests
-import json
 
 URL = (
     "https://sn-watson-emotion.labs.skills.network/"
@@ -14,8 +13,7 @@ HEADERS = {
 
 def emotion_detector(text_to_analyse):
     """
-    Analyze the emotions in the supplied text using
-    the Watson NLP Emotion Prediction API.
+    Analyze emotions in the supplied text.
     """
 
     input_json = {
@@ -30,4 +28,15 @@ def emotion_detector(text_to_analyse):
         json=input_json
     )
 
-    return response.json()["emotionPredictions"][0]["emotion"]
+    emotions = response.json()["emotionPredictions"][0]["emotion"]
+
+    dominant_emotion = max(emotions, key=emotions.get)
+
+    return {
+        "anger": emotions["anger"],
+        "disgust": emotions["disgust"],
+        "fear": emotions["fear"],
+        "joy": emotions["joy"],
+        "sadness": emotions["sadness"],
+        "dominant_emotion": dominant_emotion
+    }
