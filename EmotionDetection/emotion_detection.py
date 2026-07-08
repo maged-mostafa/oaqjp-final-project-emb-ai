@@ -1,3 +1,7 @@
+"""
+Module for detecting emotions using the Watson NLP Emotion Prediction API.
+"""
+
 import requests
 
 URL = (
